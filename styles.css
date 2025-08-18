@@ -99,8 +99,8 @@ main {
   align-items: center;
   justify-content: center;
 
-  height: 4rem;
-  width: 4rem;
+  height: 3rem;
+  width: 3rem;
 
   user-select: none;
 }
