@@ -23,7 +23,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 h1 {
@@ -36,8 +36,9 @@ h1 {
 
 img {
   max-width: 500px;
-  width: 100%;
+  width: auto;
   height: auto;
+  object-fit: contain;
 }
 
 main {
