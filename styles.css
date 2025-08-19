@@ -44,6 +44,16 @@ img {
   margin: 0 auto 1vh;
 }
 
+.title-img {
+  display: block;
+  margin: 0 auto 0.6vh;
+  width: min(92vw, var(--max-board-width), 560px);
+  max-width: 100%;
+  height: auto;
+  max-height: 18vh;
+  object-fit: contain;
+}
+
 .image-container {
   max-height: 20vh;
   width: 100%;
