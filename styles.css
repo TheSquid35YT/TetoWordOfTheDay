@@ -1,10 +1,17 @@
 :root {
   --color-black: #121213;
   --color-white: #fff;
-  --color-green: #538d4e;
-  --color-yellow: #B59F3B;
+  --color-green: #EF5350;
+  --color-yellow: #FFC107;
   --color-gray-dark: #3A3A3C;
   --color-gray-light: #818384;
+  /* Responsive sizing variables */
+  --tile-size: min(15vw, 30px, 8vh);
+  --key-size: min(8vw, 20px, 5vh);
+  --keyboard-gap: 0.3rem;
+  --font-size-large: min(6vw, 2rem);
+  --font-size-medium: min(4vw, 1.2rem);
+  --font-size-small: min(3vw, 0.9rem);
 }
 
 html { box-sizing: border-box; }
@@ -13,24 +20,27 @@ html { box-sizing: border-box; }
 body {
   background: var(--color-black);
   color: var(--color-white);
-
   font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
-
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
-
+  padding: 1vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
+  overflow: hidden; /* Prevent scrolling or "overflow-y: auto"*/
 }
 
-header { border-bottom: 1px solid var(--color-gray-dark); }
+header { 
+  border-bottom: 1px solid var(--color-gray-dark);
+  padding: 1vh 0;
+  text-align: center;
+}
 
 h1 {
-  margin: 10px 0;
+  margin: 0;
   padding: 0;
-  text-align: center;
+  font-size: var(--font-size-large);
+  line-height: 1.2;
 }
 
 main {
@@ -39,6 +49,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1vh 0;
 }
 
 .toaster {
@@ -48,6 +59,7 @@ main {
   transform: translate(-50%, 0);
   pointer-events: none;
   width: fit-content;
+  z-index: 10;
 }
 
 .toaster ul {
@@ -68,6 +80,7 @@ main {
   text-align: center;
   opacity: 1;
   transition: opacity 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+  font-size: var(--font-size-small);
 }
 
 .fade { opacity: 0; }
@@ -75,39 +88,42 @@ main {
 #board, #keyboard {
   display: flex;
   flex-direction: column;
-  gap: 6px; /* Between each row */
+  gap: 0.6vh; /* Between each row */
   text-transform: uppercase;
+  width: 100%;
 }
 
 #board ul,
 #keyboard ul {
   display: flex;
   list-style: none;
-  gap: 6px; /* Between each cell */
+  gap: 0.6vh; /* Between each cell */
   padding: 0;
   margin: 0;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 [data-status],
 [data-key] {
   border: 2px solid var(--color-gray-dark);
   font-weight: 700;
-  font-size: 2rem;
-  line-height: 2rem;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  height: 3.75rem;
-  width: 3.75rem;
-
   user-select: none;
+  aspect-ratio: 1/1; /* Maintain square shape */
+}
+
+[data-status] {
+  font-size: var(--font-size-large);
+  width: var(--tile-size);
+  height: var(--tile-size);
 }
 
 #keyboard {
-  gap: 8px; /* Between each row */
-  padding-bottom: 10px;
+  gap: var(--keyboard-gap); /* Between each row */
+  padding-bottom: 1vh;
 }
 
 #keyboard ul { justify-content: center; }
@@ -116,25 +132,25 @@ main {
   background: var(--color-gray-light);
   border: none;
   border-radius: 4px;
-
-  font-size: 1rem;
-
-  height: 3.8rem;
-  width: 2.8rem;
-
+  font-size: var(--font-size-medium);
+  width: var(--key-size);
+  height: var(--key-size);
   cursor: pointer;
-
   transition: all .3s ease-in-out;
 }
 
-[data-key='Enter'] { width: 6rem; }
+[data-key='Enter'] { 
+  width: calc(var(--key-size) * 1.8);
+  font-size: var(--font-size-small);
+}
 
 [data-key='Backspace'] {
   background-image: url(./backspace.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 50%;
   text-indent: -9999px;
-  width: 4rem;
+  width: calc(var(--key-size) * 1.5);
 }
 
 [data-status='filled']      { border: 1px solid var(--color-gray-light); }
@@ -143,6 +159,8 @@ main {
 [data-status='none']        { background: var(--color-gray-dark); }
 
 [data-animation='pop']      { animation: PopIn 100ms; }
+[data-animation='flip']     { animation: Flip .50s ease-in; }
+[data-animation='invalid']  { animation: Shake 600ms; }
 
 @keyframes PopIn {
   from {
@@ -154,8 +172,6 @@ main {
     opacity: 1;
   }
 }
-
-[data-animation='flip']     { animation: Flip .50s ease-in; }
 
 @keyframes Flip {
   from {
@@ -169,8 +185,6 @@ main {
   }
 }
 
-[data-animation='invalid']  { animation: Shake 600ms; }
-
 @keyframes Shake {
   10%, 90% {
     transform: translateX(-1px);
@@ -183,5 +197,17 @@ main {
   }
   40%, 60% {
     transform: translateX(4px);
+  }
+}
+
+/* Adjust for very small screens */
+@media (max-height: 1500px) {
+  :root {
+    --tile-size: min(12vw, 8vh);
+    --key-size: min(7vw, 5vh);
+  }
+  
+  h1 {
+    font-size: var(--font-size-medium);
   }
 }

@@ -202,6 +202,13 @@ const generateBoard = (board, rows = 6, columns = 5, keys = [], keyboard = false
     const elmRow = document.createElement('ul');
 
     elmRow.setAttribute('data-row', row);
+    
+    // Adjust keyboard row lengths for responsiveness
+    let rowLength = columns;
+    if (keyboard && row === 2) {
+      // Make bottom row shorter for mobile
+      rowLength = Math.min(columns, 7);
+    }
 
     for (let column = 0; column < columns; column++) {
       const elmColumn = document.createElement('li');
