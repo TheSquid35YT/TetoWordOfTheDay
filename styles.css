@@ -36,9 +36,17 @@ h1 {
 
 img {
   max-width: 500px;
+  max-height: 20vh; /* Limits height to 20% of viewport height */
   width: auto;
   height: auto;
   object-fit: contain;
+  margin-bottom: 1vh;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  img {
+    max-height: 15vh; /* Reduce height further on portrait screens */
+  }
 }
 
 main {
@@ -47,6 +55,8 @@ main {
   justify-content: center;
   align-items: center;
   gap: 1vh;
+  flex: 1; /* Take available space */
+  overflow-y: auto; /* Allow scrolling if needed */
 }
 
 .toaster {
