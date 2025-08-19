@@ -34,6 +34,11 @@ h1 {
   line-height: 1.2;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 main {
   display: flex;
   flex-direction: column;
