@@ -27,7 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden; /* Prevent scrolling or "overflow-y: auto"*/
+  overflow-y: auto; /* Prevent scrolling*/
 }
 
 header { 
@@ -49,6 +49,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.6vh; 
   padding: 1vh 0;
 }
 
