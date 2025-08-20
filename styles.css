@@ -34,10 +34,43 @@ h1 {
   line-height: 1.2;
 }
 
-img {
+.vertical-center {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.transformTitle {
+  text-align: center;
+  /*transform: scale(0.25, 0.25);*/
+  /*transform: translate(500px,100px);*/
+}
+
+.title-img {
+  display: block;
+  margin: 0 auto 0.6vh;
+  width: min(92vw, 560px); /* scale by viewport but cap */
+  max-width: 100%;
+  height: auto;
+  max-height: 12vh;       /* important: cap vertical size for short iframes */
+  object-fit: contain;
+}
+
+/*img {
+  max-width: 50vw;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1vh;
+}*/
+
+/*img {
   max-width: 100%;
   max-height: 20vh; /* Limits height to 20% of viewport height */
-  width: auto;
+  /*width: auto;
   height: auto;
   object-fit: contain;
   display: block;
@@ -52,7 +85,7 @@ img {
   height: auto;
   max-height: 18vh;
   object-fit: contain;
-}
+}*/
 
 .image-container {
   max-height: 20vh;
