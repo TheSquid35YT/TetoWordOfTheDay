@@ -6,6 +6,8 @@ const BACKSPACE_KEY = 'Backspace';
 const ENTER_KEY = 'Enter';
 //const WORD_LIST = window.words;
 const WORD_LIST = (window.words);
+const GUESS_LIST = (window.allowedWords);
+
 /*const WORD_LIST = [
   'HELLO', 'PASTA', 'PANIC',
   'SKILL', 'ARROW', 'BIRDS',
@@ -21,6 +23,8 @@ const WORD_LIST = (window.words);
 ];*/
 
 const WORD_OF_THE_DAY = (WORD_LIST[getRandomIndex(WORD_LIST.length)]).toUpperCase();
+
+
 /*const WORD_OF_THE_DAY = (window.words)[Math.floor(Math.random() * (window.words).length)];
 console.log(window.words);*/
 
@@ -33,6 +37,7 @@ let currentWord = '';
 // Get everything setup and the game responding to user actions.
 const init = () => {
   console.log('👋 Welcome to Wordle');
+  playIntroAudio();
 
   const KEYBOARD_KEYS = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
 
@@ -174,17 +179,18 @@ const onKeyDown = (key) => {
 
   if (key === ENTER_KEY) {
     if (currentWord.length < 5) {
-      showMessage('You\'re missing a few letters, don\'t you think?');
+      playInvalidAudio();
+      showMessage('Not enough letters');
       return;
     }
 
-    if (currentWord.length === 5 && WORD_LIST.includes(currentWord.toLowerCase())) {
+    if (currentWord.length === 5 && GUESS_LIST.includes(currentWord.toLowerCase())) {
       checkGuess(currentWord, WORD_OF_THE_DAY);
     } else {
+      playInvalidAudio();
       currentRow.setAttribute('data-animation', 'invalid');
-      showMessage('That\'s not even a real word, is it?');
+      showMessage('???');
     }
-
     return;
   }
 
@@ -259,3 +265,17 @@ document.addEventListener('DOMContentLoaded', init);
 function getRandomIndex (maxLength) {
   return Math.floor(Math.random() * Math.floor(maxLength));
 }
+
+//Play sound for invalid word
+function playInvalidAudio() {
+  let invalidAudio = new Audio("Teto Huh.mp3");
+  invalidAudio.volume = 0.25;
+  invalidAudio.play();
+};
+
+//Play sound for intro
+function playIntroAudio() {
+  let introAudio = new Audio("Teto Word Of The Day Intro.mp3");
+  introAudio.volume = 0.25;
+  introAudio.play();
+};

@@ -6,7 +6,8 @@
   --color-gray-dark: #3A3A3C;
   --color-gray-light: #818384;
   --tile-size: min(15vw, 8vh, 60px);
-  --key-size: min(8vw, 5vh, 40px);
+  /*--key-size: min(8vw, 5vh, 40px);*/
+  --key-size: min(8vw, 5vh, 80px);
   --keyboard-gap: 0.3rem;
 }
 
@@ -19,7 +20,7 @@ body {
   font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
   height: 100vh;
   margin: 0;
-  padding: 1vh;
+  /*padding: 1vh;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -190,7 +191,7 @@ main {
 
 #keyboard {
   gap: var(--keyboard-gap);
-  padding-bottom: 1vh;
+  /*padding-bottom: 1vh;*/
 }
 
 #keyboard ul { justify-content: center; }
